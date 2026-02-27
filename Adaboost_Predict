@@ -1,0 +1,12 @@
+def adaboost_predict(X, models, alphas):
+    
+    final_pred = np.zeros(len(X))
+    
+    for model, alpha in zip(models, alphas):
+        pred = model.predict(X)
+        pred = np.where(pred == 0, -1, 1)  # convert to -1,1
+        final_pred += alpha * pred
+
+    return np.sign(final_pred)
+
+#use X=[[2,3]] for sample run
